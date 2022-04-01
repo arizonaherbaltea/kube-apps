@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: wallabag
   namespace: '{{ .Values.argocd.namespace }}'
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     namespace: wallabag
