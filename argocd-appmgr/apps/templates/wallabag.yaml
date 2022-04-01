@@ -1,23 +1,23 @@
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: wallabag
-#   namespace: '{{ .Values.argocd.namespace }}'
-#   finalizers:
-#     - resources-finalizer.argocd.argoproj.io
-# spec:
-#   destination:
-#     namespace: wallabag
-#     server: '{{ .Values.spec.destination.server }}'
-#   project: local.herbamatte.apps
-#   source:
-#     path: configs/wallabag
-#     repoURL: 'git@github.com:herbaltealeaf/kube-apps.git'
-#     targetRevision: HEAD
-#   syncPolicy:
-#     automated:
-#       prune: true
-#       selfHeal: true
-#     syncOptions:     # Sync options which modifies sync behavior
-#       - CreateNamespace=true # Namespace Auto-Creation ensures that namespace specified as the application destination exists in the destination cluster.
-#       - PruneLast=true
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: wallabag
+  namespace: '{{ .Values.argocd.namespace }}'
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: wallabag
+    server: '{{ .Values.spec.destination.server }}'
+  project: local.herbamatte.apps
+  source:
+    path: configs/wallabag
+    repoURL: 'git@github.com:herbaltealeaf/kube-apps.git'
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:     # Sync options which modifies sync behavior
+      - CreateNamespace=true # Namespace Auto-Creation ensures that namespace specified as the application destination exists in the destination cluster.
+      - PruneLast=true
