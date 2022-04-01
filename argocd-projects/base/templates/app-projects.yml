@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-projects
+  namespace: {{ .Values.argocd.namespace }}
+spec:
+  project: {{ .Values.base.project }}
+  source:
+    path: apps/argocd-projects/projects
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision: {{ .Values.spec.source.targetRevision }}
+    helm:
+      valueFiles:
+      - ../values.yaml
+  destination:
+    server: {{ .Values.spec.destination.server }}
+    namespace: {{ .Values.argocd.namespace }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
