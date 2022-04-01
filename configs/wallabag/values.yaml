@@ -84,7 +84,7 @@ ingress:
 # @default -- See values.yaml
 persistence:
   images:
-    enabled: false
+    enabled: true
     mountPath: /var/www/wallabag/web/assets/images
   cache:
     ## Note that if you make cache persistent, you may need to clear it (with `bin/console cache:clear --env=prod`) to apply any changes you make to wallabag's parameters.
@@ -110,12 +110,12 @@ mariadb:
 #    For more options see [postgresql chart documentation](https://github.com/bitnami/charts/tree/master/bitnami/postgresql)
 # @default -- See values.yaml
 postgresql:
-  enabled: false
+  enabled: true
   postgresqlUsername: wallabag
   postgresqlPassword: wallabag-pass
   postgresqlDatabase: wallabag
   persistence:
-    enabled: false
+    enabled: true
 
 # -- Enable and configure redis subchart under this key.
 #    For more options see [redis chart documentation](https://github.com/bitnami/charts/tree/master/bitnami/redis)
