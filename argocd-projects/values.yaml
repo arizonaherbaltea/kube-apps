@@ -10,7 +10,7 @@ spec:
 
 base:
   # project for the app of apps. Should be a restricted project as deletion of the app of apps can cause a cascading deletion, removing all the apps under `./collection/templates/`
-  project: local.herbamatte.infrastructure
+  project: default
 
 # namespace of argocd. These appprojects need to be created as part of argocd's own namespace.
 argocd:
