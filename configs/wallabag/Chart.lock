@@ -1,0 +1,15 @@
+dependencies:
+- name: common
+  repository: https://library-charts.k8s-at-home.com
+  version: 4.3.0
+- name: redis
+  repository: https://charts.bitnami.com/bitnami
+  version: 15.7.6
+- name: postgresql
+  repository: https://charts.bitnami.com/bitnami
+  version: 10.16.2
+- name: mariadb
+  repository: https://charts.bitnami.com/bitnami
+  version: 10.4.4
+digest: sha256:fff405ca58244835fed278f5a9114d77ca29ae4d7f6f3a43b1b636d1f4ec3bcb
+generated: "2022-04-01T00:06:47.7690799-07:00"

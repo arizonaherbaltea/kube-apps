@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-appmgr
+  namespace: {{ .Values.argocd.namespace }}
+spec:
+  project: {{ .Values.base.project }}
+  source:
+    path: {{ .Values.spec.source.basespath }}
+    repoURL: 'git@github.com:herbaltealeaf/kube-apps.git'
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+      - ../values.yaml
+  destination:
+    server: {{ .Values.spec.destination.server }}
+    namespace: {{ .Values.argocd.namespace }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - PruneLast=true

@@ -1,0 +1,19 @@
+spec:
+  destination:
+    # kubernetes server to target for each app
+    server: https://kubernetes.default.svc
+  source:
+    # git repo to get app's chart
+    repoURL: 'git@github.com:herbaltealeaf/kube-apps.git'
+    # revision a.k.a. git branch to target when looking for the chart.
+    targetRevision: HEAD
+    # the .spec.source.path for base (app of apps)
+    basespath: argocd-appmgr/apps
+
+base:
+  # project for the app of apps. Should be a restricted project as deletion of the app of apps can cause a cascading deletion, removing all the apps under `./collection/templates/`
+  project: local.herbamatte.infrastructure
+
+argocd:
+  # namespace of the argocd app. certain kubernetes resources must be created in this namespace for argocd to manage them.
+  namespace:  argocd

@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wallabag-ingress
+spec:
+  rules:
+  - host: wallabag.herbamatte.local
+    http:
+      paths:
+      - backend:
+          service:
+            name: wallabag
+            port:
+              number: 80
+        pathType: ImplementationSpecific
