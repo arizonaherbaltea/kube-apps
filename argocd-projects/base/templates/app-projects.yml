@@ -6,7 +6,7 @@ metadata:
 spec:
   project: {{ .Values.base.project }}
   source:
-    path: apps/argocd-projects/projects
+    path: argocd-projects/projects
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
     helm:
