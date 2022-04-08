@@ -20,8 +20,8 @@ env:
   # -- Set the container timezone
   TZ: UTC
   # MYSQL_ROOT_PASSWORD:
-  POSTGRES_PASSWORD: eqOHOoxwEP
-  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: wallabag-rootpass
+  POSTGRES_USER: wallabee
   # POPULATE_DATABASE:
   ## For SYMFONY__ENV__ parameters' documentation, visit https://doc.wallabag.org/en/admin/parameters.html
   ## redis, rabbitmq, and mailer are optional. database is not optional.
@@ -97,27 +97,27 @@ persistence:
 #    For more options see [mariadb chart documentation](https://github.com/bitnami/charts/tree/master/bitnami/mariadb)
 # @default -- See values.yaml
 mariadb:
-  enabled: false
+  enabled: true
   architecture: standalone
   auth:
     database: wallabag
-    username: wallabag
+    username: wallabee
     password: wallabag-pass
     rootPassword: wallabag-rootpass
   primary:
     persistence:
-      enabled: false
+      enabled: true
 
 # -- Enable and configure postgresql database subchart under this key.
 #    For more options see [postgresql chart documentation](https://github.com/bitnami/charts/tree/master/bitnami/postgresql)
 # @default -- See values.yaml
 postgresql:
-  enabled: true
+  enabled: false
   postgresqlUsername: wallabag
   postgresqlPassword: wallabag-pass
   postgresqlDatabase: wallabag
   persistence:
-    enabled: true
+    enabled: false
 
 # -- Enable and configure redis subchart under this key.
 #    For more options see [redis chart documentation](https://github.com/bitnami/charts/tree/master/bitnami/redis)
