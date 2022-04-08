@@ -19,23 +19,23 @@ image:
 env:
   # -- Set the container timezone
   TZ: UTC
-  # MYSQL_ROOT_PASSWORD:
-  POSTGRES_PASSWORD: wallabag-rootpass
-  POSTGRES_USER: wallabee
+  MYSQL_ROOT_PASSWORD: wallabag-rootpass
+  # POSTGRES_PASSWORD: wallabag-rootpass
+  # POSTGRES_USER: wallabee
   # POPULATE_DATABASE:
   ## For SYMFONY__ENV__ parameters' documentation, visit https://doc.wallabag.org/en/admin/parameters.html
   ## redis, rabbitmq, and mailer are optional. database is not optional.
-  SYMFONY__ENV__DATABASE_DRIVER: pdo_pgsql
+  SYMFONY__ENV__DATABASE_DRIVER: pdo_mysql
   # SYMFONY__ENV__DATABASE_DRIVER_CLASS:
-  SYMFONY__ENV__DATABASE_HOST: wallabag-postgresql
-  SYMFONY__ENV__DATABASE_PORT: 5432
+  SYMFONY__ENV__DATABASE_HOST: wallabag-mariadb
+  SYMFONY__ENV__DATABASE_PORT: 3306
   SYMFONY__ENV__DATABASE_NAME: wallabag
   SYMFONY__ENV__DATABASE_USER: wallabee
   SYMFONY__ENV__DATABASE_PASSWORD: wallapass
   # SYMFONY__ENV__DATABASE_PATH:
   # SYMFONY__ENV__DATABASE_TABLE_PREFIX:
   # SYMFONY__ENV__DATABASE_SOCKET:
-  # SYMFONY__ENV__DATABASE_CHARSET:
+  SYMFONY__ENV__DATABASE_CHARSET: utf8mb4
   SYMFONY__ENV__DOMAIN_NAME: https://wallabag.herbamatte.local
   # SYMFONY__ENV__MAILER_TRANSPORT:
   # SYMFONY__ENV__MAILER_USER:
