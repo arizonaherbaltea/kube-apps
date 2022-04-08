@@ -1,134 +1,134 @@
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wallabag-websecure-ingress
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "true"
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: wallabag.herbamatte.local
+    http:
+      paths:
+      - backend:
+          service:
+            name: wallabag
+            port:
+              number: 80
+        pathType: ImplementationSpecific
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wallabag-web-ingress
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "true"
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: wallabag.herbamatte.local
+    http:
+      paths:
+      - backend:
+          service:
+            name: wallabag
+            port:
+              number: 80
+        pathType: ImplementationSpecific
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: IngressRoute
 # metadata:
-#   name: wallabag-websecure-ingress
-#   annotations:
-#     ingress.kubernetes.io/ssl-redirect: "true"
-#     ingress.kubernetes.io/force-ssl-redirect: "true"
-#     traefik.ingress.kubernetes.io/router.tls: "true"
-#     traefik.ingress.kubernetes.io/router.entrypoints: websecure
-#     kubernetes.io/ingress.class: traefik
+#   name: admin-https
 # spec:
-#   rules:
-#   - host: wallabag.herbamatte.local
-#     http:
-#       paths:
-#       - backend:
-#           service:
-#             name: wallabag
-#             port:
-#               number: 80
-#         pathType: ImplementationSpecific
-# ---
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#   name: wallabag-web-ingress
-#   annotations:
-#     ingress.kubernetes.io/ssl-redirect: "true"
-#     ingress.kubernetes.io/force-ssl-redirect: "true"
-#     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
-#     kubernetes.io/ingress.class: traefik
-# spec:
-#   rules:
-#   - host: wallabag.herbamatte.local
-#     http:
-#       paths:
-#       - backend:
-#           service:
-#             name: wallabag
-#             port:
-#               number: 80
-#         pathType: ImplementationSpecific
-# # apiVersion: traefik.containo.us/v1alpha1
-# # kind: IngressRoute
-# # metadata:
-# #   name: admin-https
-# # spec:
-# #   entryPoints:
-# #     - web
-# #     - websecure
-# #   routes:
-# #   - match: Host(`wallabag.herbamatte.local`)
-# #     kind: Rule
-# #     services:
-# #     - name: wallabag
-# #       port: 80
-# #     #  scheme: https
-# #     middlewares:
-# #     - name: admin-https
-# #     #- name: admin-auth
-# #     #- name: admin-header
-# #   # tls:
-# #   #   secretName: supersecret
-# # ---
-# # apiVersion: traefik.containo.us/v1alpha1
-# # kind: Middleware
-# # metadata:
-# #   name: admin-auth
-# # spec:
-# #   basicAuth:
-# #     secret: authsecret
+#   entryPoints:
+#     - web
+#     - websecure
+#   routes:
+#   - match: Host(`wallabag.herbamatte.local`)
+#     kind: Rule
+#     services:
+#     - name: wallabag
+#       port: 80
+#     #  scheme: https
+#     middlewares:
+#     - name: admin-https
+#     #- name: admin-auth
+#     #- name: admin-header
+#   # tls:
+#   #   secretName: supersecret
 # ---
 # apiVersion: traefik.containo.us/v1alpha1
 # kind: Middleware
 # metadata:
-#   name: admin-https
+#   name: admin-auth
 # spec:
-#   redirectScheme:
-#     scheme: https
-#     permanent: true
-#     port: 443
-
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: example.com-ingress
-  namespace: kube-system
-spec:
-  entryPoints:
-    - websecure
-  routes:
-  - match: HostRegexp(`{host:(www\.)?}wallabag.herbamatte.local`)
-    kind: Rule
-    services:
-    - name: wallabag
-      port: 80
-      namespace: wallabag
-  tls:
-    certResolver: default
-    domains:
-    - main: wallabag.herbamatte.local
-    sans:
-      - www.wallabag.herbamatte.local
-
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: http-example.com-redirect-to-https
-  namespace: kube-system
-spec:
-  entryPoints:
-    - web
-  routes:
-    - match: HostRegexp(`{host:(www\.)?}wallabag.herbamatte.local`)
-      kind: Rule 
-      services:
-        - name: example
-          port: 80
-      middlewares:
-        - name: redirect-https
-          namespace: kube-system
-
+#   basicAuth:
+#     secret: authsecret
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: redirect-https
-  namespace: kube-system
+  name: admin-https
 spec:
   redirectScheme:
     scheme: https
-    permanent: "true"
+    permanent: true
     port: 443
+
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: IngressRoute
+# metadata:
+#   name: example.com-ingress
+#   namespace: kube-system
+# spec:
+#   entryPoints:
+#     - websecure
+#   routes:
+#   - match: HostRegexp(`{host:(www\.)?}wallabag.herbamatte.local`)
+#     kind: Rule
+#     services:
+#     - name: wallabag
+#       port: 80
+#       namespace: wallabag
+#   tls:
+#     certResolver: default
+#     domains:
+#     - main: wallabag.herbamatte.local
+#     sans:
+#       - www.wallabag.herbamatte.local
+
+# ---
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: IngressRoute
+# metadata:
+#   name: http-example.com-redirect-to-https
+#   namespace: kube-system
+# spec:
+#   entryPoints:
+#     - web
+#   routes:
+#     - match: HostRegexp(`{host:(www\.)?}wallabag.herbamatte.local`)
+#       kind: Rule 
+#       services:
+#         - name: example
+#           port: 80
+#       middlewares:
+#         - name: redirect-https
+#           namespace: kube-system
+
+# ---
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: Middleware
+# metadata:
+#   name: redirect-https
+#   namespace: kube-system
+# spec:
+#   redirectScheme:
+#     scheme: https
+#     permanent: "true"
+#     port: 443
