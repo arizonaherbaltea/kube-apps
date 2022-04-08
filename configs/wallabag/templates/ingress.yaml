@@ -1,15 +1,54 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: wallabag-ingress
+# spec:
+#   rules:
+#   - host: wallabag.herbamatte.local
+#     http:
+#       paths:
+#       - backend:
+#           service:
+#             name: wallabag
+#             port:
+#               number: 80
+#         pathType: ImplementationSpecific
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
 metadata:
-  name: wallabag-ingress
+  name: admin-https
 spec:
-  rules:
-  - host: wallabag.herbamatte.local
-    http:
-      paths:
-      - backend:
-          service:
-            name: wallabag
-            port:
-              number: 80
-        pathType: ImplementationSpecific
+  entryPoints:
+    #- web
+    - websecure
+  routes:
+  - match: Host(`wallabag.herbamatte.local`) && PathPrefix(`/`)
+    kind: Rule
+    services:
+    - name: wallabag
+      port: 80
+    #  scheme: https
+ #   middlewares:
+ #   - name: admin-https
+    #- name: admin-auth
+    #- name: admin-header
+  tls:
+    secretName: supersecret
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: admin-auth
+spec:
+  basicAuth:
+    secret: authsecret
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: admin-https
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
+    port: 443
