@@ -22,7 +22,7 @@ spec:
     - web
     - websecure
   routes:
-  - match: Host(`wallabag.herbamatte.local`) && PathPrefix(`/`)
+  - match: Host(`wallabag.herbamatte.local`)
     kind: Rule
     services:
     - name: wallabag
