@@ -28,8 +28,8 @@ spec:
     - name: wallabag
       port: 80
     #  scheme: https
- #   middlewares:
- #   - name: admin-https
+   middlewares:
+   - name: admin-https
     #- name: admin-auth
     #- name: admin-header
   tls:
