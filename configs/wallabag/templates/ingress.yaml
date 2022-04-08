@@ -19,7 +19,7 @@ metadata:
   name: admin-https
 spec:
   entryPoints:
-    #- web
+    - web
     - websecure
   routes:
   - match: Host(`wallabag.herbamatte.local`) && PathPrefix(`/`)
@@ -32,8 +32,8 @@ spec:
     - name: admin-https
     #- name: admin-auth
     #- name: admin-header
-  tls:
-    secretName: supersecret
+  # tls:
+  #   secretName: supersecret
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
