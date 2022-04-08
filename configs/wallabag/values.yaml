@@ -29,11 +29,11 @@ env:
   # SYMFONY__ENV__DATABASE_DRIVER_CLASS:
   SYMFONY__ENV__DATABASE_HOST: wallabag-mariadb
   SYMFONY__ENV__DATABASE_PORT: 3306
-  SYMFONY__ENV__DATABASE_NAME: wallabag
+  SYMFONY__ENV__DATABASE_NAME: root
   SYMFONY__ENV__DATABASE_USER: wallabee
   SYMFONY__ENV__DATABASE_PASSWORD: wallapass
   # SYMFONY__ENV__DATABASE_PATH:
-  # SYMFONY__ENV__DATABASE_TABLE_PREFIX:
+  SYMFONY__ENV__DATABASE_TABLE_PREFIX: wallabag_
   # SYMFONY__ENV__DATABASE_SOCKET:
   SYMFONY__ENV__DATABASE_CHARSET: utf8mb4
   SYMFONY__ENV__DOMAIN_NAME: https://wallabag.herbamatte.local
@@ -100,8 +100,8 @@ mariadb:
   enabled: true
   architecture: standalone
   auth:
-    database: wallabag
-    username: wallabee
+    database: symfony
+    username: root
     password: wallabag-pass
     rootPassword: wallabag-rootpass
   primary:
