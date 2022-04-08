@@ -20,8 +20,8 @@ env:
   # -- Set the container timezone
   TZ: UTC
   # MYSQL_ROOT_PASSWORD:
-  POSTGRES_PASSWORD: wallabag-pass
-  POSTGRES_USER: wallabag
+  POSTGRES_PASSWORD: eqOHOoxwEP
+  POSTGRES_USER: postgres
   # POPULATE_DATABASE:
   ## For SYMFONY__ENV__ parameters' documentation, visit https://doc.wallabag.org/en/admin/parameters.html
   ## redis, rabbitmq, and mailer are optional. database is not optional.
