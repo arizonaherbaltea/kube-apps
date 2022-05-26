@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.name }}-custom-dnsmasq
+  labels:
+    app: {{ .Values.name }}
+data:
+  02-custom.conf: |
+    host-record=rancher.herbamatte.local,10.1.100.51
+    host-record=rancher.herbamatte.local,10.1.100.52
+    host-record=rancher.herbamatte.local,10.1.100.53
+    host-record=argocd.herbamatte.local,10.1.100.51
+    host-record=argocd.herbamatte.local,10.1.100.52
+    host-record=argocd.herbamatte.local,10.1.100.53

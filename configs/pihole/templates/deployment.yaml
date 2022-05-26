@@ -1,7 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
   labels:
     app: {{ .Values.name }}
   name: {{ .Values.name }}
@@ -13,7 +12,8 @@ spec:
   strategy: {}
   template:
     metadata:
-      creationTimestamp: null
+      annotations:
+        checksum.config.dnsmasqConfig: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum | trunc 63 }}
       labels:
         app: {{ .Values.name }}
     spec:
@@ -25,3 +25,26 @@ spec:
         env:
         - name: TZ
           value: "America/Phoenix"
+        volumeMounts:
+        # - mountPath: /etc/pihole
+        #   name: config
+        #   {{- if .Values.persistentVolumeClaim.subPath }}
+        #   subPath: {{ .Values.persistentVolumeClaim.subPath }}
+        #   {{- end }}
+        - mountPath: /etc/dnsmasq.d/02-custom.conf
+          name: custom-dnsmasq
+          subPath: 02-custom.conf
+      volumes:
+      - name: config
+#         {{- if .Values.persistentVolumeClaim.enabled }}
+#         persistentVolumeClaim:
+#           claimName: {{ if .Values.persistentVolumeClaim.existingClaim }}{{ .Values.persistentVolumeClaim.existingClaim }}{{- else }}{{ template "pihole.fullname" . }}{{- end }}
+#         {{- else if .Values.customVolumes.enabled }}
+# {{- toYaml .Values.customVolumes.config | nindent 8 }}
+#         {{- else }}
+#         emptyDir: {}
+#         {{- end }}
+      - configMap:
+          defaultMode: 420
+          name: {{ .Values.name }}-custom-dnsmasq
+        name: custom-dnsmasq
