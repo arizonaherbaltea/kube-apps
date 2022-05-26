@@ -1,0 +1,10 @@
+name: pihole
+image:
+  # -- image repository
+  repository: pihole/pihole
+  # -- image tag
+  # Note: Upgrading the wallabag version generally requires a migration. https://doc.wallabag.org/en/admin/upgrade.html
+  tag: 2022.05
+  # -- image pull policy
+  pullPolicy: IfNotPresent
+
