@@ -20,10 +20,10 @@ spec:
   - port: 853
     targetPort: 53
     protocol: TCP
-    name: dns-tcp
+    name: secdns-tcp
   - port: 853
     targetPort: 53
     protocol: UDP
-    name: dns-udp
+    name: secdns-udp
   externalIPs:
   - 10.1.100.63
