@@ -3,22 +3,22 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app: ${{ .Values.name }}
-  name: ${{ .Values.name }}
+    app: {{ .Values.name }}
+  name: {{ .Values.name }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ${{ .Values.name }}
+      app: {{ .Values.name }}
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: ${{ .Values.name }}
+        app: {{ .Values.name }}
     spec:
       containers:
-      - image: ${{ .Values.image.repository }}:${{ .Values.image.tag }}
-        name: ${{ .Values.name }}
-        imagePullPolicy: ${{ .Values.image.pullPolicy }}
+      - image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        name: {{ .Values.name }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
         resources: {}
