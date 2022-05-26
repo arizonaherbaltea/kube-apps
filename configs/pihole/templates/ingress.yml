@@ -18,4 +18,4 @@ spec:
     protocol: UDP
     name: dns-udp
   externalIPs:
-  - fuchsia.ip.address
+  - 10.1.100.63
