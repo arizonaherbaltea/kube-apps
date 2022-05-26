@@ -22,3 +22,6 @@ spec:
         name: {{ .Values.name }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         resources: {}
+        env:
+        - name: TZ
+          value: "America/Phoenix"
