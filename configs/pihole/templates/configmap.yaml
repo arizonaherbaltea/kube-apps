@@ -6,6 +6,7 @@ metadata:
     app: {{ .Values.name }}
 data:
   02-custom.conf: |
+    except-interface=nonexisting
     host-record=rancher.herbamatte.local,10.1.100.51
     host-record=rancher.herbamatte.local,10.1.100.52
     host-record=rancher.herbamatte.local,10.1.100.53
