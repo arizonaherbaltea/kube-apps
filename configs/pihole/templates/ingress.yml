@@ -26,4 +26,5 @@ spec:
     protocol: UDP
     name: secdns-udp
   externalIPs:
-  - 10.1.100.63
+  - 10.1.100.67
+  - 10.1.100.66

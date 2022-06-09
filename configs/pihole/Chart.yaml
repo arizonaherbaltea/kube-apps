@@ -1,4 +1,4 @@
-description: A self hostable application for saving web pages, freely.
-name: wallabag
+description: DNS server with custom blocklists
+name: pihole
 version: 1.0.0
 kubeVersion: ">=1.16.0-0"
